@@ -13,7 +13,7 @@ async function loadModel() {
  try {
   if (!window.tf || !window.tflite_web_api_ModuleFactory) throw new Error('Prediction files did not load');
   await tf.setBackend('cpu'); await tf.ready();
-  const [wasm, bytes] = await Promise.all([getBytes('./vendor/tflite_web_api_cc.wasm'), getBytes('./model/tomato.tflite')]);
+  const [wasm, bytes] = await Promise.all([getBytes('./tflite_web_api_cc.wasm'), getBytes('./tomato.tflite')]);
   model = await createLeafEngine(tflite_web_api_ModuleFactory, wasm, bytes);
   $('model-status').textContent = 'Model ready · on-device';
  } catch (error) {
