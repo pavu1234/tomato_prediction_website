@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tomato Leaf Check — image prediction</title>
+<meta name="description" content="Check a tomato leaf photo against early blight, late blight and healthy classes. Real model predictions, processed on your device.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23182824'/%3E%3Cpath d='M9 24V8h14v4H13v12z' fill='%23b8ef76'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="./style.css">
+<script defer src="./vendor/tf.min.js"></script><script defer src="./vendor/tflite_web_api_cc.js"></script><script defer src="./engine.js"></script><script defer src="./app.js"></script>
+</head><body>
+<header><div class="shell header-inner"><a class="brand" href="./"><span class="brand-mark" aria-hidden="true">T</span>Tomato Leaf Check</a><span class="privacy">Photos stay on your device</span></div></header>
+<main class="shell">
+<div class="intro"><div><p class="eyebrow">TOMATO LEAF CLASSIFIER</p><h1>A closer look at your leaf.</h1><p>Choose a clear tomato leaf photo to check for early blight, late blight, or a healthy appearance.</p></div><div class="model-state"><span id="model-status" role="status">Loading model…</span><button id="retry" class="text-button" hidden>Retry loading</button></div></div>
+<div class="workspace">
+<section class="panel input-panel" aria-labelledby="photo-title">
+<div class="panel-heading"><span class="step">01</span><h2 id="photo-title">Your leaf photo</h2><span id="image-size" class="meta"></span></div>
+<div id="drop-zone" class="drop-zone"><div id="upload-prompt"><span class="upload-icon" aria-hidden="true">＋</span><h3>Bring a leaf into focus</h3><p>Drag a photo here or choose one below.</p><span class="meta">JPG, PNG or WebP · up to 10 MB</span></div><img id="preview" alt="Selected leaf for analysis" hidden></div>
+<div class="file-row"><label class="secondary-button" for="photo">Choose photo</label><input class="file-input" id="photo" type="file" accept="image/jpeg,image/png,image/webp"><span id="file-name">No photo selected</span></div>
+<p class="photo-tip">Use one leaf, in good light, against a simple background.</p>
+<button id="predict" class="primary-button" disabled>Analyze leaf</button><p id="message" role="alert" class="message" hidden></p>
+</section>
+<section class="panel result-panel" aria-labelledby="result-title" aria-live="polite" aria-atomic="true">
+<div class="panel-heading"><span class="step">02</span><h2 id="result-title">Model prediction</h2></div>
+<div id="empty-result" class="empty-result"><span class="result-symbol" aria-hidden="true">—</span><h3>Ready when you are</h3><p>Select a leaf photo, then choose<br><strong>Analyze leaf</strong> to see the result.</p></div>
+<div id="result" hidden><p class="eyebrow result-label">CLOSEST MATCH</p><h3 id="prediction-name" class="prediction-name"></h3><div class="score-line"><strong id="top-score"></strong><span>model score</span></div><p id="result-description" class="result-description"></p><div id="scores" class="scores" aria-label="Scores for all three classes"></div><p id="low-score" class="low-score" hidden>The top score is below 50%. This result is uncertain; try a clearer photo.</p><p class="score-note">Scores compare these three classes. They are not a measure of disease severity or a guarantee of diagnosis.</p></div>
+<div class="result-caution"><strong>A first check, not a diagnosis.</strong><p>This model always chooses among three classes. It cannot reliably identify other diseases or reject non-tomato photos. Confirm concerns with a plant specialist.</p></div>
+</section></div>
+<details class="model-details"><summary>About this model <span class="validation">95.68% validation accuracy</span></summary><div class="details-content"><div><h3>Trained on PlantVillage</h3><p>MobileNetV3Small, trained on a curated subset of tomato leaf images. This app uses the original float32 TensorFlow Lite weights.</p><p>Only three classes are supported: early blight, healthy, and late blight.</p></div><div><h3>What the result means</h3><p>Validation accuracy: <strong>95.68% on 440 images</strong>; macro F1: 0.9566. The 424-image test set remains locked and has not been evaluated.</p><p>These are controlled dataset results, not a measure of performance on field or drone photos. A high score can still be wrong.</p></div><div><h3>Private by design</h3><p>Prediction runs in your browser. This app does not upload or store your selected photo. The model downloads when you open the page.</p><p><a href="https://github.com/spMohanty/PlantVillage-Dataset" target="_blank" rel="noopener noreferrer">PlantVillage dataset</a></p></div></div></details>
+<footer>Tomato Leaf Check <span>Three classes. One photo at a time.</span></footer>
+<noscript>This app needs JavaScript enabled to run predictions.</noscript>
+</main></body></html>

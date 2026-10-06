@@ -1,0 +1,165 @@
+{
+  "sample_count": 9,
+  "selection": "First 3 validation images in saved manifest per class; no locked test images used",
+  "model_sha256": "e6870940d15516820e946a80f39a44153fd3e617f371011186298a0bf2eb6c73",
+  "top1_agreement_with_native_tflite": 1.0,
+  "max_probability_difference": 9.834766387939453e-07,
+  "max_resize_pixel_difference": 0.0040283203125,
+  "browser_ui_test": "Unavailable: required browser-control skill not installed. WebAssembly engine and preprocessing executed in Node.",
+  "webmcp_validation": "Unavailable: no supported browser context.",
+  "samples": [
+    {
+      "id": "246d6e2751cf7e82e3d62763",
+      "true_class": "early_blight",
+      "width": 256,
+      "height": 256,
+      "sha256": "29b79036b67724f6a76895d17ef1b863ad7a7134e03141b1feb601a591336123",
+      "web_scores": [
+        0.9904940724372864,
+        6.050077899999451e-06,
+        0.009499890729784966
+      ],
+      "native_scores": [
+        0.9904939532279968,
+        6.050192496331874e-06,
+        0.00950002484023571
+      ]
+    },
+    {
+      "id": "90ed3ead5030bce1091b4a0e",
+      "true_class": "early_blight",
+      "width": 256,
+      "height": 256,
+      "sha256": "dac3102137b279c6a777c5d12637747c38ac4e787db5b28b59bea9cec1c92a52",
+      "web_scores": [
+        0.5675780177116394,
+        0.11305886507034302,
+        0.3193631172180176
+      ],
+      "native_scores": [
+        0.5675781965255737,
+        0.11305969208478928,
+        0.3193621337413788
+      ]
+    },
+    {
+      "id": "45ec483f6c5c25041b843f2d",
+      "true_class": "early_blight",
+      "width": 256,
+      "height": 256,
+      "sha256": "6d212f360c48da8c6f6563291b60e60bd5c215f981320adde51c6bf6bdddb855",
+      "web_scores": [
+        0.9626051187515259,
+        2.771111667243531e-06,
+        0.03739214688539505
+      ],
+      "native_scores": [
+        0.962605357170105,
+        2.771128038148163e-06,
+        0.03739193454384804
+      ]
+    },
+    {
+      "id": "e15400025d4ffb8bc8eb5b6d",
+      "true_class": "healthy",
+      "width": 256,
+      "height": 256,
+      "sha256": "41ae744b5de0ef4daa7936b2bbfb3d02974c675800a5a514761591670612a014",
+      "web_scores": [
+        0.0007268026820383966,
+        0.9989864230155945,
+        0.0002867177245207131
+      ],
+      "native_scores": [
+        0.0007268040790222585,
+        0.9989864230155945,
+        0.00028671883046627045
+      ]
+    },
+    {
+      "id": "f7d9ff3811bc7504a69fd560",
+      "true_class": "healthy",
+      "width": 256,
+      "height": 256,
+      "sha256": "f7364c811787aae4502fa9a1835c95858c63d79727e2e24e8760a52389a4ec92",
+      "web_scores": [
+        0.00014165246102493256,
+        0.999858021736145,
+        3.0389341532099934e-07
+      ],
+      "native_scores": [
+        0.0001416542218066752,
+        0.999858021736145,
+        3.038974796254479e-07
+      ]
+    },
+    {
+      "id": "d4ec09c2fbfe9b86840c3e0e",
+      "true_class": "healthy",
+      "width": 256,
+      "height": 256,
+      "sha256": "a6174cffa1e76a7f6e7b26c98691530b307970692f36106a10d2a08e8badb801",
+      "web_scores": [
+        2.0836374460486695e-05,
+        0.9999791383743286,
+        3.659668834643526e-08
+      ],
+      "native_scores": [
+        2.0836256226175465e-05,
+        0.9999791383743286,
+        3.6596340180494735e-08
+      ]
+    },
+    {
+      "id": "edaaccec585eb5e0e4e13d5d",
+      "true_class": "late_blight",
+      "width": 256,
+      "height": 256,
+      "sha256": "a9eebda1ea65fee7d9f42f975d8b30f962b7a12c9ffa4f38ac9d95b3eda549a3",
+      "web_scores": [
+        0.011206524446606636,
+        3.23642925650347e-05,
+        0.9887611269950867
+      ],
+      "native_scores": [
+        0.01120646670460701,
+        3.236379779991694e-05,
+        0.9887611269950867
+      ]
+    },
+    {
+      "id": "437511fce93aea76a8af1473",
+      "true_class": "late_blight",
+      "width": 256,
+      "height": 256,
+      "sha256": "70b1ba8718a4d1ef490adbced041915bf6a711c35751af8e059de3f5503c829b",
+      "web_scores": [
+        5.2587940444936976e-05,
+        2.690619460565813e-08,
+        0.9999474287033081
+      ],
+      "native_scores": [
+        5.2587791287805885e-05,
+        2.6906297634354814e-08,
+        0.9999474287033081
+      ]
+    },
+    {
+      "id": "040bfc15840df3c6c06603ae",
+      "true_class": "late_blight",
+      "width": 256,
+      "height": 256,
+      "sha256": "a1c1737213b07003774db335919d7668a53f1ccc24582f3355ae32bd21729950",
+      "web_scores": [
+        0.0001460674247937277,
+        9.562131708662491e-07,
+        0.9998528957366943
+      ],
+      "native_scores": [
+        0.00014606869081035256,
+        9.56220560510701e-07,
+        0.9998530149459839
+      ]
+    }
+  ]
+}

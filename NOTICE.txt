@@ -1,0 +1,14 @@
+Third-party runtime assets
+
+TensorFlow.js 4.9.0 (tf.min.js)
+Copyright Google LLC. Apache License 2.0.
+https://github.com/tensorflow/tfjs
+
+TensorFlow.js TFLite 0.0.1-alpha.10 WebAssembly runtime
+(tflite_web_api_cc.js and tflite_web_api_cc.wasm)
+Copyright Google LLC and TensorFlow contributors. Apache License 2.0.
+https://github.com/tensorflow/tfjs/tree/master/tfjs-tflite
+
+Files were obtained from the corresponding pinned packages on jsDelivr.
+Original JavaScript copyright/license notices are preserved.
+The included LICENSE.txt contains the Apache License 2.0.
