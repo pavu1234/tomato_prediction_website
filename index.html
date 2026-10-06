@@ -4,8 +4,8 @@
 <title>Tomato Leaf Check — image prediction</title>
 <meta name="description" content="Check a tomato leaf photo against early blight, late blight and healthy classes. Real model predictions, processed on your device.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23182824'/%3E%3Cpath d='M9 24V8h14v4H13v12z' fill='%23b8ef76'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="./style.css">
-<script defer src="./tf.min.js"></script><script defer src="./tflite_web_api_cc.js"></script><script defer src="./engine.js"></script><script defer src="./app.js?v=path-fix-2"></script>
+<link rel="stylesheet" href="./style.css?v=camera-1">
+<script defer src="./tf.min.js"></script><script defer src="./tflite_web_api_cc.js"></script><script defer src="./engine.js"></script><script defer src="./app.js?v=camera-1"></script><script defer src="./camera.js?v=camera-1"></script>
 </head><body>
 <header><div class="shell header-inner"><a class="brand" href="./"><span class="brand-mark" aria-hidden="true">T</span>Tomato Leaf Check</a><span class="privacy">Photos stay on your device</span></div></header>
 <main class="shell">
@@ -13,8 +13,9 @@
 <div class="workspace">
 <section class="panel input-panel" aria-labelledby="photo-title">
 <div class="panel-heading"><span class="step">01</span><h2 id="photo-title">Your leaf photo</h2><span id="image-size" class="meta"></span></div>
-<div id="drop-zone" class="drop-zone"><div id="upload-prompt"><span class="upload-icon" aria-hidden="true">＋</span><h3>Bring a leaf into focus</h3><p>Drag a photo here or choose one below.</p><span class="meta">JPG, PNG or WebP · up to 10 MB</span></div><img id="preview" alt="Selected leaf for analysis" hidden></div>
-<div class="file-row"><label class="secondary-button" for="photo">Choose photo</label><input class="file-input" id="photo" type="file" accept="image/jpeg,image/png,image/webp"><span id="file-name">No photo selected</span></div>
+<div id="drop-zone" class="drop-zone"><div id="upload-prompt"><span class="upload-icon" aria-hidden="true">＋</span><h3>Bring a leaf into focus</h3><p>Upload a photo or use your camera below.</p><span class="meta">JPG, PNG or WebP · up to 10 MB</span></div><img id="preview" alt="Selected leaf for analysis" hidden><video id="camera-video" autoplay muted playsinline aria-label="Live camera preview" hidden></video></div>
+<div class="file-row"><label class="secondary-button" for="photo">Choose photo</label><input class="file-input" id="photo" type="file" accept="image/jpeg,image/png,image/webp"><button id="open-camera" class="secondary-button" type="button" aria-controls="camera-panel" aria-expanded="false">Open camera</button><span id="file-name">No photo selected</span></div>
+<div id="camera-panel" class="camera-panel" hidden><p id="camera-status" role="status">Waiting for camera permission…</p><div class="camera-actions"><button id="capture-photo" class="primary-button" type="button" disabled>Capture photo</button><button id="close-camera" class="secondary-button" type="button">Close camera</button></div></div><p id="camera-error" class="message" role="alert" hidden></p><p class="camera-note">Camera access is requested only when you choose Open camera. No video is recorded or uploaded.</p>
 <p class="photo-tip">Use one leaf, in good light, against a simple background.</p>
 <button id="predict" class="primary-button" disabled>Analyze leaf</button><p id="message" role="alert" class="message" hidden></p>
 </section>

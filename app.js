@@ -4,7 +4,7 @@ const CLASSES = ['Early blight','Healthy','Late blight'];
 const NOTES = ['The model found features most similar to early blight examples.','The model found features most similar to healthy leaf examples. This does not rule out other problems.','The model found features most similar to late blight examples.'];
 let model = null, selectedImage = null, imageURL = null, selection = 0, loading = false, predicting = false;
 function message(text = '') { $('message').textContent = text; $('message').hidden = !text; }
-function updateButton() { $('predict').disabled = !model || !selectedImage || predicting; }
+function updateButton() { $('predict').disabled = !model || !selectedImage || predicting || !$('camera-panel').hidden; }
 function clearResult() { $('result').hidden = true; $('empty-result').hidden = false; }
 async function getBytes(path) { const r = await fetch(new URL(path, document.baseURI)); if (!r.ok) throw new Error(`Could not load ${path}: ${r.status}`); return await r.arrayBuffer(); }
 async function loadModel() {
@@ -22,6 +22,7 @@ async function loadModel() {
  } finally { loading = false; updateButton(); }
 }
 async function chooseFile(file) {
+ if (typeof closeCamera === 'function') closeCamera(false);
  const token = ++selection; selectedImage = null; updateButton(); clearResult(); message();
  if (imageURL) { URL.revokeObjectURL(imageURL); imageURL = null; }
  $('preview').hidden = true; $('preview').removeAttribute('src'); $('upload-prompt').hidden = false; $('file-name').textContent = 'No photo selected'; $('image-size').textContent = '';
@@ -51,7 +52,7 @@ function showResult(scores) {
  return {prediction:CLASSES[top],scores:Object.fromEntries(CLASSES.map((name,i)=>[name,scores[i]])),scope:'Three tomato leaf classes only; not a diagnosis.'};
 }
 async function predict() {
- if (predicting || !model || !selectedImage) throw new Error('Select a photo and wait for the model to be ready.');
+ if (predicting || !model || !selectedImage || !$('camera-panel').hidden) throw new Error('Select a photo and wait for the model to be ready.');
  predicting=true;const token=selection, img=selectedImage;updateButton();message();clearResult();$('predict').textContent='Analyzing…';
  try {
   await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
