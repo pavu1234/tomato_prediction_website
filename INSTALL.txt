@@ -1,38 +1,17 @@
-VIRTUAL DRONE CAMERA — ON / CAPTURE / OFF
+LEAF FLIGHT — CAMERA MONITOR FRONTEND UPDATE
 
-Extract the ZIP. Upload these SIX files to the top level of your existing
-pavu1234/tomato_prediction_website GitHub repository, replacing old copies:
-index.html
-app.js
-camera.js
-drone.css
-drone-ui.js
-drone.png
+For: https://github.com/pavu1234/tomato_prediction_website
 
-Commit, wait for GitHub Pages deployment, then refresh with Ctrl + Shift + R.
-Do not replace or delete engine.js, tomato.tflite, tf.min.js or the WASM files.
+1. Extract this ZIP on your computer.
+2. Open your GitHub repository and select Add file > Upload files.
+3. Upload index.html, drone.css and drone-ui.js into the repository root, replacing the existing versions. Upload the individual files, not the ZIP or an enclosing folder.
+4. Select Commit changes. Wait for the GitHub Pages deployment to finish.
+5. Open https://pavu1234.github.io/tomato_prediction_website/ and refresh. If it still shows the previous layout, use a private window or hard refresh.
 
-USE
-1. Drone ON requests camera permission and opens your device's live camera.
-2. Capture image selects a still photo and keeps the live camera running.
-3. Analyze leaf classifies the selected still photo shown in the thumbnail.
-4. Drone OFF stops all camera tracks. The selected photo/result remain visible.
-5. You can switch the drone ON again and capture another photo.
+This update reuses your existing drone.png, app.js, camera.js, engine.js, TFJS/TFLite files and tomato.tflite. Keep those files in place. No model, preprocessing or prediction engine changes are included.
 
-The virtual drone camera IS your laptop/phone camera. No physical aircraft is
-connected. No microphone is requested. Browsers may remember prior permission.
-Uploading a file, leaving the tab, closing the page or pressing Escape also
-switches the camera off. Camera access requires HTTPS and browser permission.
+Use Drone ON and allow camera permission. Frame one close-up tomato leaf, choose Capture image, then Analyze leaf. Drone OFF releases the camera. Upload leaf photo also remains available. The six most recent image thumbnails and their results remain in this tab only.
 
-CHANGES
-Camera lifecycle, input-state handling and interface only. The prediction
-engine, trained weights, class order, pixel preprocessing and model invocation
-are unchanged. The new app.js allows prediction of a selected still photo
-while the live stream remains on; it never classifies the video automatically.
+Inspired by the camera view and snapshot workflow in Paulooh007/drone-based-plant-monitoring-system. No reference images or code were copied. This frontend displays whole-image leaf classification, not YOLO crop detection, tracking, plant counts or lesion localization. Result labels are hidden over live video to avoid presenting an earlier captured result as live detection.
 
-CHECKS
-Mocked media API checks passed for permission-on-click, video only, capture
-without stopping the stream, OFF stopping tracks, denied permission, cancelling
-a pending permission request, tab hiding and page exit. DOM bindings, JavaScript
-syntax, and unchanged inference/preprocessing checked. A physical camera and
-real browser have not been tested in this environment.
+Verification: JavaScript syntax, original element IDs, mocked camera lifecycle, gallery size limit, result association, live-video result isolation and plain-text mission inputs passed. Real camera permissions and browser visual rendering were not verified in this environment. UI changes do not establish improved model accuracy.
