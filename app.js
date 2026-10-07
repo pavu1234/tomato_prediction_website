@@ -4,7 +4,7 @@ const CLASSES = ['Early blight','Healthy','Late blight'];
 const NOTES = ['The model found features most similar to early blight examples.','The model found features most similar to healthy leaf examples. This does not rule out other problems.','The model found features most similar to late blight examples.'];
 let model = null, selectedImage = null, imageURL = null, selection = 0, loading = false, predicting = false;
 function message(text = '') { $('message').textContent = text; $('message').hidden = !text; }
-function updateButton() { $('predict').disabled = !model || !selectedImage || predicting || !$('camera-panel').hidden; }
+function updateButton() { $('predict').disabled = !model || !selectedImage || predicting || window.droneCaptureBusy; }
 function clearResult() { $('result').hidden = true; $('empty-result').hidden = false; }
 async function getBytes(path) { const r = await fetch(new URL(path, document.baseURI)); if (!r.ok) throw new Error(`Could not load ${path}: ${r.status}`); return await r.arrayBuffer(); }
 async function loadModel() {
@@ -21,10 +21,11 @@ async function loadModel() {
   message('Could not load the model. Check your connection and choose Retry loading. If the problem continues, reload this page in a current version of Chrome, Edge, Firefox or Safari.');
  } finally { loading = false; updateButton(); }
 }
-async function chooseFile(file) {
- if (typeof closeCamera === 'function') closeCamera(false);
+async function chooseFile(file, {keepCamera = false} = {}) {
+ if (!keepCamera && typeof closeCamera === 'function') closeCamera(false);
  const token = ++selection; selectedImage = null; updateButton(); clearResult(); message();
  if (imageURL) { URL.revokeObjectURL(imageURL); imageURL = null; }
+ $('captured-frame').hidden = true; $('captured-thumbnail').removeAttribute('src');
  $('preview').hidden = true; $('preview').removeAttribute('src'); $('upload-prompt').hidden = false; $('file-name').textContent = 'No photo selected'; $('image-size').textContent = '';
  if (!file) return;
  if (!['image/jpeg','image/png','image/webp'].includes(file.type)) { message('Please choose a JPG, PNG or WebP image.'); return; }
@@ -34,7 +35,8 @@ async function chooseFile(file) {
   const img = new Image(); img.src = url; await img.decode();
   if (token !== selection) return;
   if (!img.naturalWidth || img.naturalWidth * img.naturalHeight > 40000000) throw new Error('Image too large');
-  selectedImage = img; $('preview').src = url; $('preview').hidden = false; $('upload-prompt').hidden = true;
+  selectedImage = img; $('preview').src = url; $('preview').hidden = !!(keepCamera && cameraStream); $('upload-prompt').hidden = true;
+  $('captured-thumbnail').src = url; $('captured-frame').hidden = false;
   $('file-name').textContent = file.name; $('image-size').textContent = `${img.naturalWidth} × ${img.naturalHeight}`;
  } catch (error) { if (token === selection) { message('This image could not be opened, or exceeds 40 megapixels. Try a smaller JPG, PNG or WebP.'); URL.revokeObjectURL(url); imageURL = null; } }
  finally { if (token === selection) updateButton(); }
@@ -52,7 +54,7 @@ function showResult(scores) {
  return {prediction:CLASSES[top],scores:Object.fromEntries(CLASSES.map((name,i)=>[name,scores[i]])),scope:'Three tomato leaf classes only; not a diagnosis.'};
 }
 async function predict() {
- if (predicting || !model || !selectedImage || !$('camera-panel').hidden) throw new Error('Select a photo and wait for the model to be ready.');
+ if (predicting || !model || !selectedImage || window.droneCaptureBusy) throw new Error('Select a photo and wait for the model to be ready.');
  predicting=true;const token=selection, img=selectedImage;updateButton();message();clearResult();$('predict').textContent='Analyzing…';
  try {
   await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));

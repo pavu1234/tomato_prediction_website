@@ -1,0 +1,38 @@
+VIRTUAL DRONE CAMERA — ON / CAPTURE / OFF
+
+Extract the ZIP. Upload these SIX files to the top level of your existing
+pavu1234/tomato_prediction_website GitHub repository, replacing old copies:
+index.html
+app.js
+camera.js
+drone.css
+drone-ui.js
+drone.png
+
+Commit, wait for GitHub Pages deployment, then refresh with Ctrl + Shift + R.
+Do not replace or delete engine.js, tomato.tflite, tf.min.js or the WASM files.
+
+USE
+1. Drone ON requests camera permission and opens your device's live camera.
+2. Capture image selects a still photo and keeps the live camera running.
+3. Analyze leaf classifies the selected still photo shown in the thumbnail.
+4. Drone OFF stops all camera tracks. The selected photo/result remain visible.
+5. You can switch the drone ON again and capture another photo.
+
+The virtual drone camera IS your laptop/phone camera. No physical aircraft is
+connected. No microphone is requested. Browsers may remember prior permission.
+Uploading a file, leaving the tab, closing the page or pressing Escape also
+switches the camera off. Camera access requires HTTPS and browser permission.
+
+CHANGES
+Camera lifecycle, input-state handling and interface only. The prediction
+engine, trained weights, class order, pixel preprocessing and model invocation
+are unchanged. The new app.js allows prediction of a selected still photo
+while the live stream remains on; it never classifies the video automatically.
+
+CHECKS
+Mocked media API checks passed for permission-on-click, video only, capture
+without stopping the stream, OFF stopping tracks, denied permission, cancelling
+a pending permission request, tab hiding and page exit. DOM bindings, JavaScript
+syntax, and unchanged inference/preprocessing checked. A physical camera and
+real browser have not been tested in this environment.
