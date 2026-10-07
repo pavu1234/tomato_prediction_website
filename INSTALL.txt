@@ -1,17 +1,28 @@
-LEAF FLIGHT — CAMERA MONITOR FRONTEND UPDATE
+MULTI-DRONE CAMERA UPDATE — LEAF FLIGHT
 
-For: https://github.com/pavu1234/tomato_prediction_website
+This is an update for your existing tomato_prediction_website, not a replacement trained model.
 
-1. Extract this ZIP on your computer.
-2. Open your GitHub repository and select Add file > Upload files.
-3. Upload index.html, drone.css and drone-ui.js into the repository root, replacing the existing versions. Upload the individual files, not the ZIP or an enclosing folder.
-4. Select Commit changes. Wait for the GitHub Pages deployment to finish.
-5. Open https://pavu1234.github.io/tomato_prediction_website/ and refresh. If it still shows the previous layout, use a private window or hard refresh.
+1. Extract the ZIP.
+2. Open https://github.com/pavu1234/tomato_prediction_website
+3. Select Add file > Upload files.
+4. Upload these files to the repository ROOT (not inside a new folder):
+   index.html
+   drone.css
+   drone-ui.js
+   camera.js
+   whep-camera.js
+   CAMERA_SETUP.md
+   drone.png
+5. Commit changes and wait for GitHub Pages to deploy. Refresh your website.
 
-This update reuses your existing drone.png, app.js, camera.js, engine.js, TFJS/TFLite files and tomato.tflite. Keep those files in place. No model, preprocessing or prediction engine changes are included.
+Keep your existing app.js, engine.js, tf.min.js, tflite_web_api_cc.js,
+tflite_web_api_cc.wasm and tomato.tflite in place. They are not replaced here.
+The adapter/ folder is for your ground-station computer, not GitHub Pages.
 
-Use Drone ON and allow camera permission. Frame one close-up tomato leaf, choose Capture image, then Analyze leaf. Drone OFF releases the camera. Upload leaf photo also remains available. The six most recent image thumbnails and their results remain in this tab only.
+On the website choose the camera connection BEFORE Drone ON:
+- Phone / laptop: allow permission, capture a leaf, then Analyze leaf.
+- Connected capture device: refresh, explicitly select your receiver/capture device, then Drone ON.
+- Network adapter: follow CAMERA_SETUP.md first; enter its HTTPS WHEP endpoint.
 
-Inspired by the camera view and snapshot workflow in Paulooh007/drone-based-plant-monitoring-system. No reference images or code were copied. This frontend displays whole-image leaf classification, not YOLO crop detection, tracking, plant counts or lesion localization. Result labels are hidden over live video to avoid presenting an earlier captured result as live detection.
-
-Verification: JavaScript syntax, original element IDs, mocked camera lifecycle, gallery size limit, result association, live-video result isolation and plain-text mission inputs passed. Real camera permissions and browser visual rendering were not verified in this environment. UI changes do not establish improved model accuracy.
+Drone ON/OFF controls the VIDEO CONNECTION ONLY. It does not operate drone motors or power.
+No physical drone or streaming adapter was available for end-to-end testing.

@@ -42,7 +42,7 @@
   const live = !el('camera-video').hidden && !el('camera-panel').hidden;
   const photo = !el('preview').hidden && !!el('preview').getAttribute('src');
   const busy = el('predict').textContent.includes('Analyzing');
-  el('source-badge').textContent = live ? 'DRONE CAMERA · LIVE' : photo ? 'STILL IMAGE · DRONE OFF' : 'DRONE OFF';
+  el('source-badge').textContent = live ? (window.activeCameraSource || 'CAMERA') + ' · LIVE' : photo ? 'STILL IMAGE · DRONE OFF' : 'DRONE OFF';
   el('feed-state').textContent = busy ? 'ANALYZING IMAGE' : live ? 'CAMERA PREVIEW' : photo ? 'FRAME LOADED' : 'AWAITING INPUT';
   el('result-file').textContent = el('file-name').textContent;
   el('frame-label').hidden = live || !photo || el('result').hidden;
