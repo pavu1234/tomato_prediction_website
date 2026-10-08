@@ -1,0 +1,247 @@
+{
+  "class_order": [
+    "early_blight",
+    "healthy",
+    "late_blight"
+  ],
+  "test_results": {
+    "PlantVillage": {
+      "baseline": {
+        "n": 424,
+        "accuracy": 0.9528301886792453,
+        "macro_f1": 0.9517322941534762,
+        "confusion_matrix": [
+          [
+            132,
+            2,
+            14
+          ],
+          [
+            0,
+            148,
+            0
+          ],
+          [
+            4,
+            0,
+            124
+          ]
+        ],
+        "classes": {
+          "early_blight": {
+            "precision": 0.9705882352941176,
+            "recall": 0.8918918918918919,
+            "f1-score": 0.9295774647887324,
+            "support": 148.0
+          },
+          "healthy": {
+            "precision": 0.9866666666666667,
+            "recall": 1.0,
+            "f1-score": 0.9932885906040269,
+            "support": 148.0
+          },
+          "late_blight": {
+            "precision": 0.8985507246376812,
+            "recall": 0.96875,
+            "f1-score": 0.9323308270676691,
+            "support": 128.0
+          },
+          "accuracy": 0.9528301886792453,
+          "macro avg": {
+            "precision": 0.9519352088661552,
+            "recall": 0.9535472972972974,
+            "f1-score": 0.9517322941534762,
+            "support": 424.0
+          },
+          "weighted avg": {
+            "precision": 0.9544533449146682,
+            "recall": 0.9528301886792453,
+            "f1-score": 0.9526474576952594,
+            "support": 424.0
+          }
+        }
+      },
+      "candidate": {
+        "n": 424,
+        "accuracy": 0.9481132075471698,
+        "macro_f1": 0.9468704098554844,
+        "confusion_matrix": [
+          [
+            130,
+            2,
+            16
+          ],
+          [
+            0,
+            148,
+            0
+          ],
+          [
+            2,
+            2,
+            124
+          ]
+        ],
+        "classes": {
+          "early_blight": {
+            "precision": 0.9848484848484849,
+            "recall": 0.8783783783783784,
+            "f1-score": 0.9285714285714286,
+            "support": 148.0
+          },
+          "healthy": {
+            "precision": 0.9736842105263158,
+            "recall": 1.0,
+            "f1-score": 0.9866666666666667,
+            "support": 148.0
+          },
+          "late_blight": {
+            "precision": 0.8857142857142857,
+            "recall": 0.96875,
+            "f1-score": 0.9253731343283582,
+            "support": 128.0
+          },
+          "accuracy": 0.9481132075471698,
+          "macro avg": {
+            "precision": 0.9480823270296955,
+            "recall": 0.9490427927927928,
+            "f1-score": 0.9468704098554844,
+            "support": 424.0
+          },
+          "weighted avg": {
+            "precision": 0.9510242157709884,
+            "recall": 0.9481132075471698,
+            "f1-score": 0.9478844322860093,
+            "support": 424.0
+          }
+        }
+      }
+    },
+    "PlantDoc": {
+      "baseline": {
+        "n": 28,
+        "accuracy": 0.5357142857142857,
+        "macro_f1": 0.47595579450418163,
+        "confusion_matrix": [
+          [
+            9,
+            0,
+            0
+          ],
+          [
+            7,
+            1,
+            0
+          ],
+          [
+            6,
+            0,
+            5
+          ]
+        ],
+        "classes": {
+          "early_blight": {
+            "precision": 0.4090909090909091,
+            "recall": 1.0,
+            "f1-score": 0.5806451612903226,
+            "support": 9.0
+          },
+          "healthy": {
+            "precision": 1.0,
+            "recall": 0.125,
+            "f1-score": 0.2222222222222222,
+            "support": 8.0
+          },
+          "late_blight": {
+            "precision": 1.0,
+            "recall": 0.45454545454545453,
+            "f1-score": 0.625,
+            "support": 11.0
+          },
+          "accuracy": 0.5357142857142857,
+          "macro avg": {
+            "precision": 0.8030303030303031,
+            "recall": 0.5265151515151515,
+            "f1-score": 0.47595579450418163,
+            "support": 28.0
+          },
+          "weighted avg": {
+            "precision": 0.810064935064935,
+            "recall": 0.5357142857142857,
+            "f1-score": 0.49566372247823864,
+            "support": 28.0
+          }
+        }
+      },
+      "candidate": {
+        "n": 28,
+        "accuracy": 0.7857142857142857,
+        "macro_f1": 0.7777777777777778,
+        "confusion_matrix": [
+          [
+            8,
+            1,
+            0
+          ],
+          [
+            2,
+            5,
+            1
+          ],
+          [
+            2,
+            0,
+            9
+          ]
+        ],
+        "classes": {
+          "early_blight": {
+            "precision": 0.6666666666666666,
+            "recall": 0.8888888888888888,
+            "f1-score": 0.7619047619047619,
+            "support": 9.0
+          },
+          "healthy": {
+            "precision": 0.8333333333333334,
+            "recall": 0.625,
+            "f1-score": 0.7142857142857143,
+            "support": 8.0
+          },
+          "late_blight": {
+            "precision": 0.9,
+            "recall": 0.8181818181818182,
+            "f1-score": 0.8571428571428571,
+            "support": 11.0
+          },
+          "accuracy": 0.7857142857142857,
+          "macro avg": {
+            "precision": 0.7999999999999999,
+            "recall": 0.7773569023569024,
+            "f1-score": 0.7777777777777778,
+            "support": 28.0
+          },
+          "weighted avg": {
+            "precision": 0.8059523809523811,
+            "recall": 0.7857142857142857,
+            "f1-score": 0.7857142857142857,
+            "support": 28.0
+          }
+        }
+      }
+    }
+  },
+  "user_image_is_known_regression_not_independent_accuracy": true,
+  "regression": {
+    "baseline": [
+      0.9776657819747925,
+      2.1212020584471247e-08,
+      0.022334180772304535
+    ],
+    "candidate": [
+      0.23208411037921906,
+      2.9364806323428638e-05,
+      0.7678865194320679
+    ]
+  },
+  "passes_release_gate": true
+}

@@ -1,0 +1,14 @@
+{
+  "frozen_before_training": true,
+  "seed": 42,
+  "maximum_epochs": 15,
+  "learning_rate": 1e-05,
+  "fine_tune_last_layers": 40,
+  "field_training_repetitions": 4,
+  "validation_field_macro_f1_minimum_improvement": 0.03,
+  "validation_internal_max_accuracy_drop": 0.015,
+  "test_field_macro_f1_must_improve": true,
+  "test_internal_max_accuracy_drop": 0.015,
+  "selection_uses_user_image": false,
+  "selection_uses_test": false
+}

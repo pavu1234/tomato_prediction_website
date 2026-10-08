@@ -1,0 +1,8 @@
+{
+  "size_bytes": 4030700,
+  "sha256": "7c921aefe7035e4b7c6ae96d1e5daf065638b6be675dc95afcb998dfedd28004",
+  "validation_samples": 477,
+  "top1_agreement": 1.0,
+  "max_probability_delta": 4.887580871582031e-06,
+  "compatible": true
+}

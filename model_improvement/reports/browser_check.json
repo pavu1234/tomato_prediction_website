@@ -1,0 +1,112 @@
+[
+  {
+    "id": "reported-late-blight",
+    "label": "late_blight",
+    "prediction": "late_blight",
+    "scores": [
+      0.2320786714553833,
+      0.000029363671274040826,
+      0.7678919434547424
+    ],
+    "milliseconds": 100.3000000002794
+  },
+  {
+    "id": "original-early_blight",
+    "label": "early_blight",
+    "prediction": "early_blight",
+    "scores": [
+      0.9877191781997681,
+      0.000003963858489441918,
+      0.012276839464902878
+    ],
+    "milliseconds": 64.29999999981374
+  },
+  {
+    "id": "original-healthy",
+    "label": "healthy",
+    "prediction": "healthy",
+    "scores": [
+      0.002407409716397524,
+      0.9967241883277893,
+      0.0008684321655891836
+    ],
+    "milliseconds": 57.5
+  },
+  {
+    "id": "original-late_blight",
+    "label": "late_blight",
+    "prediction": "late_blight",
+    "scores": [
+      0.006965653970837593,
+      0.00006222933006938547,
+      0.9929721355438232
+    ],
+    "milliseconds": 48.5
+  },
+  {
+    "id": "pv_246d6e2751cf7e82e3d62763",
+    "label": "early_blight",
+    "prediction": "early_blight",
+    "scores": [
+      0.9877191781997681,
+      0.000003963858489441918,
+      0.012276839464902878
+    ],
+    "milliseconds": 52.40000000037253
+  },
+  {
+    "id": "pv_e15400025d4ffb8bc8eb5b6d",
+    "label": "healthy",
+    "prediction": "healthy",
+    "scores": [
+      0.002407409716397524,
+      0.9967241883277893,
+      0.0008684321655891836
+    ],
+    "milliseconds": 49.6999999997206
+  },
+  {
+    "id": "pv_edaaccec585eb5e0e4e13d5d",
+    "label": "late_blight",
+    "prediction": "late_blight",
+    "scores": [
+      0.006965653970837593,
+      0.00006222933006938547,
+      0.9929721355438232
+    ],
+    "milliseconds": 44.10000000009313
+  },
+  {
+    "id": "pd_84d7b97a312bf02ba803",
+    "label": "early_blight",
+    "prediction": "late_blight",
+    "scores": [
+      0.4218232333660126,
+      0.00005210572271607816,
+      0.5781246423721313
+    ],
+    "milliseconds": 64.60000000009313
+  },
+  {
+    "id": "pd_91d43bff3baa44414afb",
+    "label": "healthy",
+    "prediction": "late_blight",
+    "scores": [
+      0.13445016741752625,
+      0.015057940967381,
+      0.8504918813705444
+    ],
+    "milliseconds": 78.40000000037253
+  },
+  {
+    "id": "pd_c543dd1a2bc1e2201641",
+    "label": "late_blight",
+    "prediction": "late_blight",
+    "scores": [
+      0.05169782042503357,
+      0.004477351438254118,
+      0.9438247680664062
+    ],
+    "milliseconds": 60.60000000009313
+  }
+]
