@@ -25,7 +25,7 @@ async function loadModel() {
  try {
   if (!window.tf || !window.tflite_web_api_ModuleFactory) throw new Error('Prediction files did not load');
   await tf.setBackend('cpu'); await tf.ready();
-  const [wasm, bytes] = await Promise.all([getBytes('./tflite_web_api_cc.wasm'), getBytes('./tomato.tflite')]);
+  const [wasm, bytes] = await Promise.all([getBytes('./tflite_web_api_cc.wasm'), getBytes('./tomato-field-7c921aef.tflite')]);
   model = await createLeafEngine(tflite_web_api_ModuleFactory, wasm, bytes);
   $('model-status').textContent = 'Model ready · on-device';
  } catch (error) {
@@ -55,7 +55,7 @@ async function chooseFile(file, {keepCamera = false} = {}) {
 }
 function showResult(scores) {
  const top = scores.indexOf(Math.max(...scores));
- $('prediction-name').textContent = CLASSES[top]; $('top-score').textContent = `${(scores[top]*100).toFixed(1)}%`; $('result-description').textContent = NOTES[top]; $('scores').replaceChildren();
+ $('prediction-name').textContent = CLASSES[top]; $('top-score').textContent = `${(scores[top]*100).toFixed(1)}%`; $('result-description').textContent = NOTES[top] + ' This is a tentative prediction; the score is not diagnostic accuracy.'; $('scores').replaceChildren();
  scores.map((score,index)=>({score,index})).sort((a,b)=>b.score-a.score).forEach(({score,index})=>{
   const row=document.createElement('div'); row.className=`score-row${index===top?' winner':''}`;
   const heading=document.createElement('div');heading.className='score-header';
@@ -93,4 +93,5 @@ $('predict').addEventListener('click',()=>{predict().catch(()=>{});});$('retry')
 $('drop-zone').addEventListener('drop',event=>{if(event.dataTransfer.files.length)chooseFile(event.dataTransfer.files[0]);});
 if(document.modelContext?.registerTool){try{Promise.resolve(document.modelContext.registerTool({name:'analyze_selected_tomato_leaf',title:'Analyze selected tomato leaf',description:'Run the trained model on the photo already selected by the user, and display all three class scores. Requires a loaded model and selected photo.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:false,untrustedContentHint:false},execute:async input=>{if(!input||typeof input!=='object'||Array.isArray(input)||Object.keys(input).length)throw new Error('Expected an empty object');return await predict();}})).catch(()=>{});}catch{}}
 loadModel();
+
 
