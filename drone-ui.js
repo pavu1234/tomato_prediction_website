@@ -30,6 +30,9 @@
   el('snapshot-count').textContent = String(gallery.children.length);
   el('snapshot-empty').hidden = true;
  }
+ document.addEventListener('leaf-input-rejected', e => {
+  if(currentSnapshot && lastSource === el('preview').getAttribute('src')) currentSnapshot.textContent=e.detail.status==='not-leaf'?'Not a leaf · rejected':'Leaf not confirmed · rejected';
+ });
  el('preview').addEventListener('load', () => { rememberImage(); updateView(); });
  const mission = () => el('mission-name').value.trim() || 'Leaf inspection';
  function updateNotes() {
@@ -41,7 +44,7 @@
  function updateView() {
   const live = !el('camera-video').hidden && !el('camera-panel').hidden;
   const photo = !el('preview').hidden && !!el('preview').getAttribute('src');
-  const busy = el('predict').textContent.includes('Analyzing');
+  const busy = /Analyzing|Checking/.test(el('predict').textContent);
   el('source-badge').textContent = live ? (window.activeCameraSource || 'CAMERA') + ' · LIVE' : photo ? 'STILL IMAGE · DRONE OFF' : 'DRONE OFF';
   el('feed-state').textContent = busy ? 'ANALYZING IMAGE' : live ? 'CAMERA PREVIEW' : photo ? 'FRAME LOADED' : 'AWAITING INPUT';
   el('result-file').textContent = el('file-name').textContent;
@@ -68,4 +71,5 @@
  el('clock').textContent = new Date().toLocaleDateString(undefined,{day:'2-digit',month:'short',year:'numeric'});
  updateView();
 })();
+
 

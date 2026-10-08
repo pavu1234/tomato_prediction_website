@@ -5,7 +5,19 @@ const NOTES = ['The model found features most similar to early blight examples.'
 let model = null, selectedImage = null, imageURL = null, selection = 0, loading = false, predicting = false;
 function message(text = '') { $('message').textContent = text; $('message').hidden = !text; }
 function updateButton() { $('predict').disabled = !model || !selectedImage || predicting || window.droneCaptureBusy; }
-function clearResult() { $('result').hidden = true; $('empty-result').hidden = false; }
+function clearResult() {
+ $('result').hidden=true;$('empty-result').hidden=false;
+ $('input-verdict').hidden=true;$('leaf-check-status').textContent='Leaf check required before disease analysis';
+}
+function rejectInput(status) {
+ const text=status==='not-leaf'?'Not a leaf — upload a clear photo of a tomato leaf.':'Leaf not confirmed — use a clear close-up of one tomato leaf.';
+ $('result').hidden=true;$('empty-result').hidden=true;
+ $('prediction-name').textContent='';$('top-score').textContent='';$('scores').replaceChildren();
+ $('input-verdict').textContent=text;$('input-verdict').hidden=false;
+ $('leaf-check-status').textContent='Disease analysis blocked';
+ document.dispatchEvent(new CustomEvent('leaf-input-rejected',{detail:{status}}));
+ return {status:'rejected',reason:text};
+}
 async function getBytes(path) { const r = await fetch(new URL(path, document.baseURI)); if (!r.ok) throw new Error(`Could not load ${path}: ${r.status}`); return await r.arrayBuffer(); }
 async function loadModel() {
  if (loading || model) return;
@@ -55,8 +67,15 @@ function showResult(scores) {
 }
 async function predict() {
  if (predicting || !model || !selectedImage || window.droneCaptureBusy) throw new Error('Select a photo and wait for the model to be ready.');
- predicting=true;const token=selection, img=selectedImage;updateButton();message();clearResult();$('predict').textContent='Analyzing…';
+ predicting=true;const token=selection, img=selectedImage;updateButton();message();clearResult();$('predict').textContent='Checking leaf…';
  try {
+  if(!window.LeafGuard)throw Object.assign(new Error('Leaf check unavailable. Reload the page. Disease analysis remains blocked.'),{code:'LEAF_CHECK_UNAVAILABLE'});
+  $('leaf-check-status').textContent='Loading leaf check… First use downloads about 154 MB; later checks can use the browser cache.';
+  const verdict=await window.LeafGuard.check(img,text=>{if(token===selection)$('leaf-check-status').textContent=text;});
+  if(token!==selection)return {status:'cancelled',reason:'Photo changed during leaf check'};
+  if(verdict.status!=='leaf')return rejectInput(verdict.status);
+  $('leaf-check-status').textContent='Leaf check passed · checking the three tomato disease classes';
+  $('predict').textContent='Analyzing…';
   await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
   // Match tf.image.resize: RGB, bilinear, half-pixel centers, float32 0–255.
   // Normalization is embedded in the model: do not divide by 255.
@@ -64,8 +83,8 @@ async function predict() {
   const values=model.predict(pixels);
   if (token!==selection) throw new Error('Photo changed during analysis');
   return showResult(values);
- } catch(error) { if(token===selection) message('Prediction could not finish. Try another photo or reload the page.');console.error(error);throw error; }
- finally { predicting=false;$('predict').textContent='Analyze leaf';updateButton(); }
+ } catch(error) { if(token===selection) {message(error.code==='LEAF_CHECK_UNAVAILABLE'?error.message:'Prediction could not finish. Try another photo or reload the page.');$('leaf-check-status').textContent='Analysis blocked — retry required';}console.error(error);throw error; }
+ finally { predicting=false;$('predict').textContent='Check & analyze leaf';updateButton(); }
 }
 $('photo').addEventListener('change',event=>{chooseFile(event.target.files[0]);event.target.value='';});
 $('predict').addEventListener('click',()=>{predict().catch(()=>{});});$('retry').addEventListener('click',()=>{message();loadModel();});
@@ -74,3 +93,4 @@ $('predict').addEventListener('click',()=>{predict().catch(()=>{});});$('retry')
 $('drop-zone').addEventListener('drop',event=>{if(event.dataTransfer.files.length)chooseFile(event.dataTransfer.files[0]);});
 if(document.modelContext?.registerTool){try{Promise.resolve(document.modelContext.registerTool({name:'analyze_selected_tomato_leaf',title:'Analyze selected tomato leaf',description:'Run the trained model on the photo already selected by the user, and display all three class scores. Requires a loaded model and selected photo.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:false,untrustedContentHint:false},execute:async input=>{if(!input||typeof input!=='object'||Array.isArray(input)||Object.keys(input).length)throw new Error('Expected an empty object');return await predict();}})).catch(()=>{});}catch{}}
 loadModel();
+
